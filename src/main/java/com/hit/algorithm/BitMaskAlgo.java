@@ -5,11 +5,23 @@ import java.util.HashSet;
  
 class BitMaskAlgo implements IBacktrackingAlg {
     static int N = 9;
- 
-    // Bitmasks for each row/column/box
-    static int row[] = new int[N], col[] = new int[N],
+    
+    private int[][] grid;
+    private int row[] = new int[N], col[] = new int[N],
                box[] = new int[N];
-    static boolean seted = false;
+    
+
+    BitMaskAlgo(int grid[][]){
+		this.grid = grid;
+		this.setInitialValues();
+	}
+	
+	public int[][] getGrid() {
+		return grid;
+	}
+
+    
+    
  
     // Utility function to find the box index
     // of an element at position [i][j] in the grid
@@ -18,27 +30,27 @@ class BitMaskAlgo implements IBacktrackingAlg {
         return i / 3 * 3 + j / 3;
     }
     
-    public boolean checkBoard(char[][] board){
-        HashSet<String>seen = new HashSet<>();
-         for(int i=0; i<9; i++){
-             for(int j=0; j<9; j++){
-                 char current_val = board[i][j];
-                 if(current_val != '.'){
-                     if(!seen.add(current_val + "found in row " + i) ||
-                             !seen.add(current_val + "found in column " + j) ||
-                             !seen.add(current_val + "found in submatrix " + i/3 + j/3)){
-
-                         return false;
-                     }
-                 }
-             }
-         }
-        return true;
-    }
+//    public boolean checkBoard(char[][] board){
+//        HashSet<String>seen = new HashSet<>();
+//         for(int i=0; i<9; i++){
+//             for(int j=0; j<9; j++){
+//                 char current_val = board[i][j];
+//                 if(current_val != '.'){
+//                     if(!seen.add(current_val + "found in row " + i) ||
+//                             !seen.add(current_val + "found in column " + j) ||
+//                             !seen.add(current_val + "found in submatrix " + i/3 + j/3)){
+//
+//                         return false;
+//                     }
+//                 }
+//             }
+//         }
+//        return true;
+//    }
  
     // Utility function to check if a number
     // is present in the corresponding row/column/box
-    public boolean isSafe(int[][] matrix, int i, int j, int number)
+    public boolean isSafe(int number, int i, int j)
     {
         return ((row[i] >> number) & 1) == 0
             && ((col[j] >> number) & 1) == 0
@@ -47,13 +59,13 @@ class BitMaskAlgo implements IBacktrackingAlg {
  
     // Utility function to set the initial values of a
     // Sudoku board (map the values in the bitmasks)
-    void setInitialValues(int grid[][])
+    void setInitialValues()
     {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid.length; j++) {
-                row[i] |= 1 << grid[i][j];
-                col[j] |= 1 << grid[i][j];
-                box[getBox(i, j)] |= 1 << grid[i][j];
+        for (int i = 0; i < this.grid.length; i++) {
+            for (int j = 0; j < this.grid.length; j++) {
+                row[i] |= 1 << this.grid[i][j];
+                col[j] |= 1 << this.grid[i][j];
+                box[getBox(i, j)] |= 1 << this.grid[i][j];
             }
         }
     }
@@ -63,14 +75,8 @@ class BitMaskAlgo implements IBacktrackingAlg {
       such a way to meet the requirements for
       Sudoku solution (non-duplication across rows,
       columns, and boxes) */
-    public boolean SolveSudoku(int grid[][], int i, int j)
-    {
-        // Set the initial values
-        if (!seted) {
-            seted = true;
-            setInitialValues(grid);
-        }
- 
+    public boolean SolveSudoku(int i, int j)
+    { 
         if (i == N - 1 && j == N)
             return true;
         if (j == N) {
@@ -78,11 +84,11 @@ class BitMaskAlgo implements IBacktrackingAlg {
             i++;
         }
  
-        if (grid[i][j] > 0)
-            return SolveSudoku(grid, i, j + 1);
+        if (this.grid[i][j] > 0)
+            return SolveSudoku(i, j + 1);
  
         for (int nr = 1; nr <= N; nr++) {
-            if (isSafe(grid, i, j, nr)) {
+            if (isSafe(nr, i, j)) {
                 /* Assign nr in the
                             current (i, j)
                             position and
@@ -93,7 +99,7 @@ class BitMaskAlgo implements IBacktrackingAlg {
                 col[j] |= 1 << nr;
                 box[getBox(i, j)] |= 1 << nr;
  
-                if (SolveSudoku(grid, i, j + 1))
+                if (SolveSudoku(i, j + 1))
                     return true;
  
                 // Remove nr from each bitmask
@@ -103,42 +109,27 @@ class BitMaskAlgo implements IBacktrackingAlg {
                 box[getBox(i, j)] &= ~(1 << nr);
             }
  
-            grid[i][j] = 0;
+            this.grid[i][j] = 0;
         }
  
         return false;
     }
  
     // Utility function to print the solved grid
-    public void print(int grid[][])
+    public void print()
     {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                System.out.printf("%d ", grid[i][j]);
+        for (int i = 0; i < this.grid.length; i++) {
+            for (int j = 0; j < this.grid[0].length; j++) {
+                System.out.printf("%d ", this.grid[i][j]);
             }
             System.out.println();
         }
     }
  
-    // Driver code
-    public void main()
+
+    public boolean solve()
     {
-        // 0 means unassigned cells
-        int grid[][] = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
-                         { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
-                         { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
-                         { 0, 0, 3, 0, 1, 0, 0, 8, 0 },
-                         { 9, 0, 0, 8, 6, 3, 0, 0, 5 },
-                         { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
-                         { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
-                         { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
-                         { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
- 
-        if (SolveSudoku(grid, 0, 0))
-            print(grid);
-        else
-            System.out.println("No solution exists");
+        return SolveSudoku(0, 0);   
     }
 }
  
-// This code is contributed by shinjanpatra.
