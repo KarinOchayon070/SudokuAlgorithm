@@ -4,7 +4,9 @@ public interface IBacktrackingAlg {
 	
 	public void print();
 	
-//	public boolean checkBoard(char[][] board);
+	public boolean checkBoard();
+			
+	public String difficulty();
 	
 	public boolean SolveSudoku(int i, int j);
 	

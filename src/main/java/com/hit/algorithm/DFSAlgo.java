@@ -4,23 +4,34 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
+
 public class DFSAlgo implements IBacktrackingAlg {
 	
 	private int[][] grid;
-
-
-	DFSAlgo(int grid[][]){
+	private int numberOfSteps = 0;
+	
+	DFSAlgo(int[][] grid){
 		this.grid = grid;
 	}
+
 	
 	public int[][] getGrid() {
 		return grid;
 	}
 	
+	
+	public String difficulty() {
+		if(numberOfSteps <= 700) {
+			return "Easy";
+		}
+		else if(numberOfSteps > 700 && numberOfSteps < 6000) {
+			return "Meduim";
+		}
+		return "Hard";
+	}
 		
 	// Utility function to print the solved grid
-	     public void print()
-	    {
+	     public void print(){
 	        for (int i = 0; i < this.grid.length; i++) {
 	            for (int j = 0; j < this.grid[0].length; j++) {
 	                System.out.printf("%d ", this.grid[i][j]);
@@ -29,23 +40,23 @@ public class DFSAlgo implements IBacktrackingAlg {
 	        }
 	    }
 	    
-//	    public boolean checkBoard(char[][] board){
-//	        HashSet<String>seen = new HashSet<>();
-//	         for(int i=0; i<9; i++){
-//	             for(int j=0; j<9; j++){
-//	                 char current_val = board[i][j];
-//	                 if(current_val != '.'){
-//	                     if(!seen.add(current_val + "found in row " + i) ||
-//	                             !seen.add(current_val + "found in column " + j) ||
-//	                             !seen.add(current_val + "found in submatrix " + i/3 + j/3)){
-//
-//	                         return false;
-//	                     }
-//	                 }
-//	             }
-//	         }
-//	        return true;
-//	    }
+	    public boolean checkBoard(){
+	  
+	        HashSet<String>seen = new HashSet<>();
+	         for(int i=0; i<9; i++){
+	             for(int j=0; j<9; j++){
+	                 int current_val = this.grid[i][j];
+	                 if(current_val != '.'){
+	                     if(!seen.add(current_val + "found in row " + i) ||
+	                             !seen.add(current_val + "found in column " + j) ||
+	                             !seen.add(current_val + "found in submatrix " + i/3 + j/3)){
+	                         return false;
+	                     }
+	                 }
+	             }
+	         }
+	        return true;
+	    }
 
 	    
 
@@ -80,6 +91,7 @@ public class DFSAlgo implements IBacktrackingAlg {
 
 	    
 	    public boolean SolveSudoku(int n, int x){
+	    	numberOfSteps+=1;
 	        int rowIndex = -1;
 	        int columnIndex = -1;
 	        int i = 0;
@@ -117,13 +129,9 @@ public class DFSAlgo implements IBacktrackingAlg {
 	    }
 	    
 	    
-	    public boolean solve()
-	    {
+	    public boolean solve(){
 	        return SolveSudoku(9, 0);        
 	    }
-	    
-	    
-	    
 	}
 
 
