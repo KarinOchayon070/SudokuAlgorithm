@@ -165,12 +165,12 @@ public class Main {
 
 		
 	
-		System.out.println("bitMaskAlgo solution\n");
-		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo(gridEasy3);
-		bitMaskAlgo.solve();
-		bitMaskAlgo.print();
-		System.out.println(bitMaskAlgo.checkBoard());
-		System.out.println(bitMaskAlgo.difficulty());
+//		System.out.println("bitMaskAlgo solution\n");
+//		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo(gridEasy3);
+//		bitMaskAlgo.solve();
+//		bitMaskAlgo.print();
+//		System.out.println(bitMaskAlgo.checkBoard());
+//		System.out.println(bitMaskAlgo.difficulty());
 
 				
 //		System.out.println("\ndfsAlgo solution\n");
@@ -178,6 +178,7 @@ public class Main {
 //		dfsAlgo.solve();
 //		dfsAlgo.print();
 //		System.out.println(dfsAlgo.checkBoard());
+//		System.out.println(dfsAlgo.getId());
 
 	}
 

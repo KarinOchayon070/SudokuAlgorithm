@@ -11,7 +11,7 @@ class BitMaskAlgo implements IBacktrackingAlg {
     private int[][] grid; //The board
     private int row[] = new int[N], col[] = new int[N], box[] = new int[N]; //Row, col and submatrix
     
-    BitMaskAlgo(int[][] grid) {
+    public BitMaskAlgo(int[][] grid) {
     	this.grid = grid;
     	this.setInitialValues();
     }
@@ -29,7 +29,18 @@ class BitMaskAlgo implements IBacktrackingAlg {
 		}
 		return "Hard";
 	}
-
+	
+	
+	//The id of each sudoku templat will be the board itself (purpose - creating unique id)
+    public String getId() {
+    	String id = "";
+    	for (int i = 0; i < this.grid.length; i++) {
+            for (int j = 0; j < this.grid[0].length; j++) {
+                id+=this.grid[i][j];
+            }
+        }
+    	return id;
+    }
     
  
     // Utility function to find the box index

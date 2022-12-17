@@ -6,6 +6,10 @@ public interface IBacktrackingAlg {
 	
 	public boolean checkBoard();
 			
+	public int[][] getGrid();
+	
+	public String getId();
+	
 	public String difficulty();
 	
 	public boolean SolveSudoku(int i, int j);

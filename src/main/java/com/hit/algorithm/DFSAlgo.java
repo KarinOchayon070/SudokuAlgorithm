@@ -10,7 +10,7 @@ public class DFSAlgo implements IBacktrackingAlg {
 	private int[][] grid;
 	private int numberOfSteps = 0;
 	
-	DFSAlgo(int[][] grid){
+	public DFSAlgo(int[][] grid){
 		this.grid = grid;
 	}
 
@@ -39,6 +39,19 @@ public class DFSAlgo implements IBacktrackingAlg {
 	            System.out.println();
 	        }
 	    }
+	    
+	    
+	    //The id of each sudoku templat will be the board itself (purpose - creating unique id)
+	    public String getId() {
+	    	String id = "";
+	    	for (int i = 0; i < this.grid.length; i++) {
+	            for (int j = 0; j < this.grid[0].length; j++) {
+	                id+=this.grid[i][j];
+	            }
+	        }
+	    	return id;
+	    }
+	    
 	    
 	    public boolean checkBoard(){
 	  
