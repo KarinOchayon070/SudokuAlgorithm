@@ -1,26 +1,27 @@
 package com.hit.algorithm;
 
-import java.io.*;
 import java.util.HashSet;
  
 class BitMaskAlgo implements IBacktrackingAlg {
 	
-    static int N = 9;
+    private int N = 9;
     private int numberOfSteps = 0;
     
     private int[][] grid; //The board
     private int row[] = new int[N], col[] = new int[N], box[] = new int[N]; //Row, col and submatrix
+        
+	public void setGrid(int[][] grid) {
+		this.grid = grid;
+		this.setInitialValues();
+		this.numberOfSteps = 0;
+	}
     
-    public BitMaskAlgo(int[][] grid) {
-    	this.grid = grid;
-    	this.setInitialValues();
-    }
     
 	public int[][] getGrid() {
 		return grid;
 	}
 	
-	public String difficulty() {
+	public String getDifficulty() {
 		if(numberOfSteps <= 900) {
 			return "Easy";
 		}
@@ -31,7 +32,7 @@ class BitMaskAlgo implements IBacktrackingAlg {
 	}
 	
 	
-	//The id of each sudoku templat will be the board itself (purpose - creating unique id)
+	//The id of each sudoku template will be the board itself (purpose - creating unique id)
     public String getId() {
     	String id = "";
     	for (int i = 0; i < this.grid.length; i++) {
@@ -45,16 +46,16 @@ class BitMaskAlgo implements IBacktrackingAlg {
  
     // Utility function to find the box index
     // of an element at position [i][j] in the grid
-    static int getBox(int i, int j){
+    public int getBox(int i, int j){
         return i / 3 * 3 + j / 3;
     }
     
-    public boolean checkBoard(){
+    public boolean isValidGrid(){
         HashSet<String>seen = new HashSet<>();
          for(int i=0; i<9; i++){
              for(int j=0; j<9; j++){
                  int current_val = this.grid[i][j];
-                 if(current_val != '.'){
+                 if(current_val != 0){
                      if(!seen.add(current_val + "found in row " + i) ||
                              !seen.add(current_val + "found in column " + j) ||
                              !seen.add(current_val + "found in submatrix " + i/3 + j/3)){

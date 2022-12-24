@@ -29,7 +29,8 @@ public class BitMaskTest {
 				{7, 4, 5, 2, 8, 6, 3, 1, 9 }  };
 		
 	
-		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo(grid);
+		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo();
+		bitMaskAlgo.setGrid(grid);
 		bitMaskAlgo.solve();
 		boolean isSameResult = TestUtils.isGridValid(bitMaskAlgo.getGrid(), solvedGrid);
 		Assert.assertTrue(isSameResult);
@@ -51,7 +52,8 @@ public class BitMaskTest {
 		
 		
 		
-		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo(grid);
+		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo();
+		bitMaskAlgo.setGrid(grid);
 		Assert.assertFalse(bitMaskAlgo.solve());		
 	}
 	
@@ -71,9 +73,43 @@ public class BitMaskTest {
 						 { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
 				
 		
-		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo(grid);
+		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo();
+		bitMaskAlgo.setGrid(grid);
 		Assert.assertFalse(bitMaskAlgo.isSafe(5, 0, 1));
 	}
+	
+	@Test
+	public void check_valid_grid() {
+		
+		int validGrid[][] = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
+				{ 5, 2, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 8, 7, 0, 0, 0, 0, 3, 1 },
+				{ 0, 0, 3, 0, 1, 0, 0, 8, 0 },
+				{ 9, 0, 0, 8, 6, 3, 0, 0, 5 },
+				{ 0, 5, 0, 0, 9, 0, 6, 0, 0 },
+				{ 1, 3, 0, 0, 0, 0, 2, 5, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 7, 4 },
+				{ 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
+		
+		int notValidGrid[][] = { { 3, 3, 6, 5, 3, 8, 4, 0, 0 },
+				 { 5, 2, 0, 5, 0, 0, 0, 0, 0 },
+				 { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
+				 { 0, 0, 3, 0, 1, 0, 0, 8, 0 },
+				 { 9, 0, 0, 8, 6, 3, 0, 0, 5 },
+				 { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
+				 { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
+				 { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
+				 { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
+				
+		
+		BitMaskAlgo bitMaskAlgo = new BitMaskAlgo();
+		bitMaskAlgo.setGrid(notValidGrid);
+		Assert.assertFalse(bitMaskAlgo.isValidGrid());
+		
+		bitMaskAlgo.setGrid(validGrid);
+		Assert.assertTrue(bitMaskAlgo.isValidGrid());
+	}
+	
 	
 
 }

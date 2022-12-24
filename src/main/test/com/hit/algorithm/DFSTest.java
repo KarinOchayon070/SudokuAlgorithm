@@ -29,7 +29,8 @@ public class DFSTest {
 				{7, 4, 5, 2, 8, 6, 3, 1, 9 }  };
 		
 	
-		DFSAlgo dfsAlgo = new DFSAlgo(grid);
+		DFSAlgo dfsAlgo = new DFSAlgo();
+		dfsAlgo.setGrid(grid);
 		dfsAlgo.solve();
 		boolean isSameResult = TestUtils.isGridValid(dfsAlgo.getGrid(), solvedGrid);
 		Assert.assertTrue(isSameResult);
@@ -51,7 +52,8 @@ public class DFSTest {
 		
 		
 		
-		DFSAlgo dfsAlgo = new DFSAlgo(grid);
+		DFSAlgo dfsAlgo = new DFSAlgo();
+		dfsAlgo.setGrid(grid);
 		Assert.assertFalse(dfsAlgo.solve());		
 	}
 	
@@ -71,8 +73,41 @@ public class DFSTest {
 				{ 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
 				
 		
-		DFSAlgo dfsAlgo = new DFSAlgo(grid);
+		DFSAlgo dfsAlgo = new DFSAlgo();
+		dfsAlgo.setGrid(grid);
 		Assert.assertFalse(dfsAlgo.isSafe(3, 0, 1));
+	}
+	
+	@Test
+	public void check_valid_grid() {
+		
+		int validGrid[][] = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
+				{ 5, 2, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 8, 7, 0, 0, 0, 0, 3, 1 },
+				{ 0, 0, 3, 0, 1, 0, 0, 8, 0 },
+				{ 9, 0, 0, 8, 6, 3, 0, 0, 5 },
+				{ 0, 5, 0, 0, 9, 0, 6, 0, 0 },
+				{ 1, 3, 0, 0, 0, 0, 2, 5, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 7, 4 },
+				{ 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
+		
+		int notValidGrid[][] = { { 3, 3, 6, 5, 3, 8, 4, 0, 0 },
+				 { 5, 2, 0, 5, 0, 0, 0, 0, 0 },
+				 { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
+				 { 0, 0, 3, 0, 1, 0, 0, 8, 0 },
+				 { 9, 0, 0, 8, 6, 3, 0, 0, 5 },
+				 { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
+				 { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
+				 { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
+				 { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
+				
+		
+		DFSAlgo dfsAlgo = new DFSAlgo();
+		dfsAlgo.setGrid(notValidGrid);
+		Assert.assertFalse(dfsAlgo.isValidGrid());
+		
+		dfsAlgo.setGrid(validGrid);
+		Assert.assertTrue(dfsAlgo.isValidGrid());
 	}
 	
 

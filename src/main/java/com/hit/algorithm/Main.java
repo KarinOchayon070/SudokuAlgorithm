@@ -173,12 +173,18 @@ public class Main {
 //		System.out.println(bitMaskAlgo.difficulty());
 
 				
-//		System.out.println("\ndfsAlgo solution\n");
-//		DFSAlgo dfsAlgo = new DFSAlgo(gridHard3);
-//		dfsAlgo.solve();
-//		dfsAlgo.print();
-//		System.out.println(dfsAlgo.checkBoard());
-//		System.out.println(dfsAlgo.getId());
+		System.out.println("\ndfsAlgo solution\n");
+		DFSAlgo dfsAlgo = new DFSAlgo();
+		dfsAlgo.setGrid(gridEasy3);
+		
+		
+		
+		boolean test = dfsAlgo.isValidGrid();
+		System.out.println(test);
+		System.out.println(dfsAlgo.getId());
+		dfsAlgo.solve();
+		dfsAlgo.print();
+		System.out.println(dfsAlgo.isValidGrid());
 
 	}
 

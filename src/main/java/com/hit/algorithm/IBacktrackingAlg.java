@@ -4,13 +4,15 @@ public interface IBacktrackingAlg {
 	
 	public void print();
 	
-	public boolean checkBoard();
+	public boolean isValidGrid();
 			
 	public int[][] getGrid();
 	
+	public void setGrid(int[][] grid);
+	
 	public String getId();
 	
-	public String difficulty();
+	public String getDifficulty();
 	
 	public boolean SolveSudoku(int i, int j);
 	
