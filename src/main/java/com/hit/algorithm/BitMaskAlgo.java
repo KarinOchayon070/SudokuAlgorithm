@@ -2,7 +2,7 @@ package com.hit.algorithm;
 
 import java.util.HashSet;
  
-class BitMaskAlgo implements IBacktrackingAlg {
+public class BitMaskAlgo implements IBacktrackingAlg {
 	
     private int N = 9;
     private int numberOfSteps = 0;
@@ -78,7 +78,7 @@ class BitMaskAlgo implements IBacktrackingAlg {
  
     // Utility function to set the initial values of a
     // Sudoku board (map the values in the bitmasks)
-    void setInitialValues(){
+    public void setInitialValues(){
         for (int i = 0; i < this.grid.length; i++) {
             for (int j = 0; j < this.grid.length; j++) {
                 row[i] |= 1 << this.grid[i][j];
