@@ -109,6 +109,4 @@ public class DFSTest {
 		dfsAlgo.setGrid(validGrid);
 		Assert.assertTrue(dfsAlgo.isValidGrid());
 	}
-	
-
 }

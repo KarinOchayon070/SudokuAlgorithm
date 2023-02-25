@@ -19,5 +19,4 @@ public interface IBacktrackingAlg {
 	public boolean isSafe(int value, int rowIndex, int columIndex);
 	
 	public boolean solve();
-
 }

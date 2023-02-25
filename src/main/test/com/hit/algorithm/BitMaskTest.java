@@ -109,7 +109,4 @@ public class BitMaskTest {
 		bitMaskAlgo.setGrid(validGrid);
 		Assert.assertTrue(bitMaskAlgo.isValidGrid());
 	}
-	
-	
-
 }

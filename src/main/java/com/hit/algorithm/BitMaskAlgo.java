@@ -16,7 +16,6 @@ public class BitMaskAlgo implements IBacktrackingAlg {
 		this.numberOfSteps = 0;
 	}
     
-    
 	public int[][] getGrid() {
 		return grid;
 	}
@@ -144,7 +143,6 @@ public class BitMaskAlgo implements IBacktrackingAlg {
         }
     }
  
-
     public boolean solve(){
         return SolveSudoku(0, 0);   
     }
